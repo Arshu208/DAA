@@ -1,0 +1,13 @@
+def calculate_cost(t):
+    freq = {}
+    total_cost = 0
+    for i, char in enumerate(t):
+        if char in freq:
+            total_cost += freq[char]
+            freq[char] += 1
+        else:
+            freq[char] = 1
+    return total_cost
+t = "aab"
+cost = calculate_cost(t)
+print(f"The cost of the string '{t}' is {cost}")
