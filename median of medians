@@ -1,0 +1,25 @@
+def median_of_medians(arr, k):
+    if len(arr) <= 5:
+        return sorted(arr)[k]
+    medians = [median(sorted(arr[i:i + 5])) for i in range(0, len(arr), 5)]
+    pivot = median_of_medians(medians, len(medians) // 2)
+    low = [x for x in arr if x < pivot]
+    high = [x for x in arr if x > pivot]
+    if k < len(low):
+        return median_of_medians(low, k)
+    elif k < len(low) + arr.count(pivot):
+        return pivot
+    else:
+        return median_of_medians(high, k - len(low) - arr.count(pivot))
+def median(arr):
+    n = len(arr)
+    return arr[n // 2] if n % 2 != 0 else (arr[n // 2 - 1] + arr[n // 2]) / 2
+arr1 = [12, 3, 5, 7, 19]
+k1 = 2
+print("The", k1, "-th smallest element is:", median_of_medians(arr1, k1))
+arr2 = [12, 3, 5, 7, 4, 19, 26]
+k2 = 3
+print("The", k2, "-th smallest element is:", median_of_medians(arr2, k2))
+arr3 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+k3 = 6
+print("The", k3, "-th smallest element is:", median_of_medians(arr3, k3))
