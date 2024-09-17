@@ -1,0 +1,14 @@
+def findKthPositive(arr, k):
+    current_num = 1
+    idx = 0
+    while k > 0:
+        if idx >= len(arr) or arr[idx] != current_num:
+            k -= 1
+            if k == 0:
+                return current_num
+        else:
+            idx += 1
+        current_num += 1
+arr = [2, 3, 4, 7, 11]
+k = 5
+print(findKthPositive(arr, k))  # Output: 9
