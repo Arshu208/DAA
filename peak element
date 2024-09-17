@@ -1,0 +1,20 @@
+def findPeakElement(nums):
+    left, right = 0, len(nums) - 1
+    
+    while left < right:
+        mid = (left + right) // 2
+        
+        # Compare mid with its next neighbor
+        if nums[mid] > nums[mid + 1]:
+            # Peak is in the left half, including mid
+            right = mid
+        else:
+            # Peak is in the right half, excluding mid
+            left = mid + 1
+    
+    # When left == right, we have found a peak
+    return left
+
+# Example usage
+nums = [1, 2, 3, 1]
+print(findPeakElement(nums))  # Output: 2
