@@ -1,0 +1,33 @@
+def merge_sort(arr, count):
+    if len(arr) > 1:
+        mid = len(arr) // 2  
+        left_half = arr[:mid]  
+        right_half = arr[mid:]
+        merge_sort(left_half, count) 
+        merge_sort(right_half, count)  
+        i = j = k = 0
+        while i < len(left_half) and j < len(right_half):
+            count[0] += 1 
+            if left_half[i] < right_half[j]:
+                arr[k] = left_half[i]
+                i += 1
+            else:
+                arr[k] = right_half[j]
+                j += 1
+            k += 1
+        while i < len(left_half):
+            arr[k] = left_half[i]
+            i += 1
+            k += 1
+        while j < len(right_half):
+            arr[k] = right_half[j]
+            j += 1
+            k += 1
+arr1 = [12, 4, 78, 23, 45, 67, 89, 1]
+comparison_count1 = [0]
+merge_sort(arr1, comparison_count1)
+print(f"Test Case 1: Sorted Array = {arr1}, Comparisons = {comparison_count1[0]}")
+arr2 = [38, 27, 43, 3, 9, 82, 10]
+comparison_count2 = [0]
+merge_sort(arr2, comparison_count2)
+print(f"Test Case 2: Sorted Array = {arr2}, Comparisons = {comparison_count2[0]}")
