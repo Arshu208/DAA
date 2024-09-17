@@ -1,0 +1,54 @@
+def is_safe(graph, color, vertex, c):
+    for neighbor in graph[vertex]:
+        if color[neighbor] == c:
+            return False
+    return True
+def graph_coloring_util(graph, color, vertex, num_colors):
+    if vertex == len(graph):
+        return True
+    for c in range(1, num_colors + 1):
+        if is_safe(graph, color, vertex, c):
+            color[vertex] = c
+            if graph_coloring_util(graph, color, vertex + 1, num_colors):
+                return True
+            color[vertex] = 0
+    return False
+def graph_coloring(graph, num_colors):
+    color = [0] * len(graph)
+    if graph_coloring_util(graph, color, 0, num_colors):
+        return color
+    return None
+def find_minimum_colors(graph):
+    num_vertices = len(graph)
+    for num_colors in range(1, num_vertices + 1):
+        if graph_coloring(graph, num_colors):
+            return num_colors
+    return num_vertices
+def simulate_coloring(graph):
+    num_colors = find_minimum_colors(graph)
+    color_assignment = graph_coloring(graph, num_colors)
+    if not color_assignment:
+        return 0
+    colored = [False] * len(graph)
+    my_turn = 0
+    alice_turn = 1
+    bob_turn = 2
+    turns = [my_turn, alice_turn, bob_turn]
+    my_coloring_count = 0
+    turn_index = 0
+    for i in range(len(graph)):
+        if not colored[i]:
+            current_turn = turns[turn_index % 3]
+            colored[i] = True
+            if current_turn == my_turn:
+                my_coloring_count += 1
+            turn_index += 1
+    return my_coloring_count
+edges = [(0, 1), (1, 2), (2, 3), (3, 0), (0, 2)]
+n = 4
+graph = [[] for _ in range(n)]
+for u, v in edges:
+    graph[u].append(v)
+    graph[v].append(u)
+max_colored_regions = simulate_coloring(graph)
+print(f"Maximum number of regions I can color: {max_colored_regions}")
