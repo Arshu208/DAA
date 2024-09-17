@@ -1,0 +1,15 @@
+class WordFilter:
+    def __init__(self, words):
+        self.prefix_suffix_map = {}
+        for index, word in enumerate(words):
+            word_length = len(word)
+            for i in range(word_length + 1):
+                for j in range(word_length + 1):
+                    prefix = word[:i]  # Get prefix of length i
+                    suffix = word[j:]  # Get suffix of length j
+                    self.prefix_suffix_map[(prefix, suffix)] = index
+    def f(self, pref, suff):
+        return self.prefix_suffix_map.get((pref, suff), -1)
+wordFilter = WordFilter(["apple"])
+output = wordFilter.f("a", "e")  # Should return 0
+print(output)
