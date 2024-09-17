@@ -1,0 +1,28 @@
+from itertools import combinations
+def generate_subset_sums(nums):
+    subset_sums = set()
+    n = len(nums)
+    for i in range(n + 1):
+        for combo in combinations(nums, i):
+            subset_sums.add(sum(combo))
+    return subset_sums
+def subset_sum_exists(set1, set2, target):
+    subset_sums1 = generate_subset_sums(set1)
+    subset_sums2 = generate_subset_sums(set2)
+    for sum1 in subset_sums1:
+        if (target - sum1) in subset_sums2:
+            return True
+    return False
+def meet_in_the_middle(E, target):
+    mid = len(E) // 2
+    set1 = E[:mid]
+    set2 = E[mid:]
+    return subset_sum_exists(set1, set2, target)
+a) E = [1, 3, 9, 2, 7, 12], exact Sum = 15
+E_a = [1, 3, 9, 2, 7, 12]
+target_a = 15
+print("Subset with exact sum", target_a, "exists in E_a:", meet_in_the_middle(E_a, target_a))
+b) E = [3, 34, 4, 12, 5, 2], exact Sum = 1
+E_b = [3, 34, 4, 12, 5, 2]
+target_b = 1
+print("Subset with exact sum", target_b, "exists in E_b:", meet_in_the_middle(E_b, target_b))
