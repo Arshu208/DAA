@@ -1,0 +1,13 @@
+def max_weight_loaded(weights, max_capacity):
+    sorted_weights = sorted(weights, reverse=True
+    total_weight = 0
+    for weight in sorted_weights:
+        if total_weight + weight <= max_capacity:
+            total_weight += weight
+        else:
+            break 
+    return total_weight
+weights = [10, 20, 30, 40, 50]
+max_capacity = 60
+print("Maximum weight loaded:", max_weight_loaded(weights, max_capacity))
+
