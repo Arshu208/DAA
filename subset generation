@@ -1,0 +1,18 @@
+def subsets_containing_element(nums, x):
+    def backtrack(start, path):
+        if x in path:
+            result.append(path[:])
+        for i in range(start, len(nums)):
+            if i > start and nums[i] == nums[i - 1]:
+                continue
+            path.append(nums[i])
+            backtrack(i + 1, path)
+            path.pop()
+    result = []
+    nums.sort() 
+    backtrack(0, [])
+    return result
+E = [2, 3, 4, 5]
+x = 3
+subsets_with_x = subsets_containing_element(E, x)
+print("The subsets containing", x, ":", subsets_with_x)
