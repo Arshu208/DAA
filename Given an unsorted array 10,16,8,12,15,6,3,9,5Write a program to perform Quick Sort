@@ -1,0 +1,11 @@
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[0]
+    less = [x for x in arr[1:] if x <= pivot]
+    greater = [x for x in arr[1:] if x > pivot]
+    sorted_arr = quick_sort(less) + [pivot] + quick_sort(greater)
+    print(sorted_arr)
+    return sorted_arr
+arr = [10, 16, 8, 12, 15, 6, 3, 9, 5]
+quick_sort(arr)
