@@ -1,0 +1,16 @@
+def binary_search(arr, key):
+    low, high, comparisons = 0, len(arr) - 1, 0
+    while low <= high:
+        mid = (low + high) // 2
+        comparisons += 1
+        if arr[mid] == key:
+            return mid, comparisons
+        elif arr[mid] < key:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1, comparisons
+array = [5, 10, 15, 20, 25, 30, 35, 40, 45]
+search_key = 20
+index, count = binary_search(array, search_key)
+print(f"Index: {index}, Comparisons: {count}")
